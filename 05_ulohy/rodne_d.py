@@ -3,7 +3,6 @@ rodne_cislo = input('Zadajte svoje rodne cislo vo formate xxxxxx/xxxx:  ')
 rc_list = []                    #bud naplnime list cyklom alebo cez funkciu list()
 for char in rodne_cislo:
     rc_list.append(char)
-print(rc_list)
 
 sex = rc_list[2]            
 

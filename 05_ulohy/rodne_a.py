@@ -4,7 +4,6 @@ cislo_list = []         #vytvorenie prazdneho listu pomocou cyklu alebo list()
 
 for char in rodne_cislo:
     cislo_list.append(char)
-print(cislo_list)
 
 
 lomitko = cislo_list[6]         #ci je pritomne lomitko v spravnej pozicii
@@ -26,3 +25,5 @@ for num in styri:
 
 if (lomitko == True and sest == True and styri == True and len(cislo_list) == 11):        #ak su splnene vsetky podmienky, cislo je zadane spravne a ci ma spravnu dlzku
     print('True')
+else:
+    print('False')

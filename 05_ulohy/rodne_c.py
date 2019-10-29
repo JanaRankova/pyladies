@@ -1,7 +1,6 @@
 rodne_cislo = input('Zadajte svoje rodne cislo vo formate xxxxxx/xxxx:  ')
 
 rc_pre_datum = list(rodne_cislo)            #rodne cislo do listu
-print(rc_pre_datum)
 
 den = '{}{}'.format(rc_pre_datum[4], rc_pre_datum[5])       #den vybratim poloziek z listu a prevedenim na string
 
