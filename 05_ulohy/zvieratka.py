@@ -1,20 +1,13 @@
 pets = ['had', 'andulka', 'pes' , 'kocka', 'kralik']
 
-pet_split = []
+pet_split =[]
 
 for pet in pets:
-    pet_list = pet[1].split()
-    pet_split.append(pet_list)
-    pet_list.append(pet)
+    pet_split.append(pet[1])
+pet_dict = dict(zip(pet_split, pets))
 
-
-print(sorted(pet_split))
-pet_split.sort()
-
-pet_sorted = []
-
-for pet2 in pet_split:
-    pet_list2 = pet2[1]
-    pet_sorted.append(pet_list2)
-
-print(pet_sorted)
+presorted_pets = sorted(pet_dict.items())
+sorted_pets = []
+for values in presorted_pets:
+    sorted_pets.append(values[1])
+print(sorted_pets)

@@ -1,48 +1,29 @@
 rodne_cislo =  input('Zadajte svoje rodne cislo vo formate xxxxxx/xxxx:  ')
-
 cislo_list = list(rodne_cislo)     
 
 #poduloha a
-lomitko = cislo_list[6]        
-if cislo_list[6] == '/':
-    lomitko = True
-
-sest = cislo_list[0:6]          
-for num in sest:
-    if num.isdigit():
-        sest = True
-
-styri = cislo_list[7:]      
-for num in styri:
-    if num.isdigit():
-        styri = True
-
-rodne_cislo_format = bool
-if (lomitko == True and sest == True and styri == True and len(cislo_list) == 11):
-    rodne_cislo_format = True        
+if (rodne_cislo[6] == '/' and rodne_cislo[0:6].isdigit() and rodne_cislo[7:11].isdigit() and len(rodne_cislo) == 11):
+    rc_format = True
+else:
+    rc_format = False    
 
 #poduloha b
 cislo = rodne_cislo.split('/')
 cislo_spolu = ''.join([cislo[0], cislo[1]])
-
-print(cislo_spolu)
-cislo_int = int(cislo_spolu)        
-
+cislo_int = int(cislo_spolu)      
 rodne_cislo_delitelne = bool
-if cislo_int % 11 == 0:
-    rodne_cislo_delitelne = True     
+
+if cislo_int % 11 == 0:    
+    rodne_cislo_delitelne = True
 else:
-    print('False')
+    rodne_cislo_delitelne = False
 
-#poduloha c
-rc_pre_datum = list(rodne_cislo)           
-
-den = '{}{}'.format(rc_pre_datum[4], rc_pre_datum[5])      
-
-rok = int('{}{}'.format(rc_pre_datum[0], rc_pre_datum[1]))     
-
+#poduloha c          
+den = int('{}{}'.format(rodne_cislo[4], rodne_cislo[5]))     
+rok = int('{}{}'.format(rodne_cislo[0], rodne_cislo[1]))      
+mesiac = int('{}{}'.format(rodne_cislo[2], rodne_cislo[3]))
 if rok == 0:
-    tisicrocie = '2000{}'.format(rok)                
+    tisicrocie = '2000{}'.format(rok)                #vynimky pre 2000 a 2001-2009 kedze int nespracuje 0 na zaciatku
 elif rok < 10:
     tisicrocie = '200{}'.format(rok)                
 elif rok < 21:
@@ -50,35 +31,25 @@ elif rok < 21:
 else:
     tisicrocie = '19{}'.format(rok)
 
-mesiac = int('{}{}'.format(rc_pre_datum[2], rc_pre_datum[3]))
-
 rodne_cislo_datum = bool
 if mesiac in range(0, 13):                 
     mesiac = mesiac
-    rodne_cislo_datum = True
 elif mesiac in range(51, 63):
     mesiac = mesiac - 50           
-    rodne_cislo_datum = True
 else:
-    print('Rodne cislo nema spravny format.')
+    rodne_cislo_datum = False
 
-
-#poduloha d
-
-sex = cislo_list[2]            
-
+#poduloha d      
 rodne_cislo_pohlavie = ''
-if sex == '0' or sex == '1':               
+if cislo_list[2] == '0' or cislo_list[2] == '1':               
     rodne_cislo_pohlavie = 'muz'
-elif sex == '5' or sex == '6':
+elif cislo_list[2] == '5' or cislo_list[2] == '6':
     rodne_cislo_pohlavie = 'zena'
 else:
     print('Rodne cislo nie je zadane v spravnom formate.')
 
-
 #zhrnutie vsetkych poduloh do podmienky 
-if (rodne_cislo_format == True and rodne_cislo_delitelne == True and rodne_cislo_datum == True):
+if (rc_format == True and rodne_cislo_delitelne == True and rodne_cislo_datum !=  False):
     print('Zadane rodne cislo ', rodne_cislo, 'je v spravnom formate. Pouzivatel je {}, narodena/y {}.{}.{}.'.format(rodne_cislo_pohlavie, den, mesiac, tisicrocie))
 else:
     print('Zadane rodne cislo nie je v spravnom formate.')
-
