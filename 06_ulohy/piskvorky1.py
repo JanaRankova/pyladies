@@ -1,13 +1,13 @@
-hracie_pole = ['-' * 20]
+hracie_pole = '--------------------'
 
 def vyhodnot(hracie_pole):
     """Vezme momentalny stav hracieho pola a podla podmienok vo funkcii, urci vyhercu."""
     stav = ''
-    if 'xxx' in hracie_pole[0]:
+    if 'xxx' in hracie_pole:
         stav = 'x'
-    elif 'ooo' in hracie_pole[0]:
+    elif 'ooo' in hracie_pole:
         stav = 'o'
-    elif '-' not in hracie_pole[0]:
+    elif '-' not in hracie_pole:
         stav = '!'
     else:
         stav = '-'
