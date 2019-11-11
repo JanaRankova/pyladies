@@ -1,12 +1,12 @@
 from turtle import forward, left, right, exitonclick
 from math import sqrt
 
-def user_input(stena):
-    """Vyziada si dlzku strany"""
-    return int(input('Zadajte dlzku strany domceka: '))
+def user_input(side):
+    """Ask for a side lenght."""
+    return int(input('Zadajte dlzku strany housea: '))
 
-def domcek(dlzka):
-    """postup pre samotny dom"""
+def house(dlzka):
+    """House blueprint :)"""
     for i in range(4):          
         forward(dlzka)
         left(90)
@@ -18,11 +18,11 @@ def domcek(dlzka):
     left(90)
     forward(sqrt(2) * dlzka)
 
-def vytvor_domcek():
-    """vlozi input do postupu na dom"""
-    stena = user_input(int)
-    domcek(stena)
+def build_house():
+    """Puts user_input into blueprint."""
+    side = user_input(int)
+    house(side)
     
-vytvor_domcek()
+build_house()
 
 exitonclick()

@@ -1,42 +1,38 @@
-stastna_str = ''
-bohata_str = ''
-stastna = bool
-bohata = bool 
+happy_str = ''
+wealthy_str = ''
 
-def user_input(a_n):
-    """zoberie odpoved od uzivatela"""
-    a_n = input('Odpovedaj len ano alebo nie (a/n). ')
-    a_n = a_n.lower()
-    a_n = a_n.replace(' ', '')
-    return a_n
+def user_input(and_or):
+    """Takes user anwer and modifies it."""
+    and_or = input('Odpovedaj len ano alebo nie (a/n). ')
+    and_or = and_or.lower()
+    and_or = and_or.replace(' ', '')
+    return and_or
 
-def conditions(stav_str):
+def conditions(state_str):
     """podla podmienok prideli stavu True alebo False"""
-    if stav_str == 'ano' or stav_str == 'a':
-        stav = True
-        return stav
-    elif stav_str == 'ne' or stav_str == 'n':
-        stav = False
-        return stav
+    if state_str == 'ano' or state_str == 'a':
+        return True
+    elif state_str == 'ne' or state_str == 'n':
+        return False
     else:
         print('Nerozumím!')
 
-def advice(stav1, stav2):
+def advice(state1, state2):
     """priradi komentar ku roznym stavom"""
-    if stav1 and stav2:
+    if state1 and state2:
         print('Gratuluji!')
-    elif stav2:
+    elif state2:
         print('Zkus se víc usmívat.')
-    elif stav1:
+    elif state1:
         print('Zkus míň utrácet.')
     else:
         print('To je mi líto.')
     return
 
 print('Si stastna? ')
-stastna_str = user_input('')
+happy_str = user_input('')
 print('Si bohata? ')
-bohata_str = user_input('')
-stastna = conditions(stastna_str)
-bohata = conditions(bohata_str)
-advice(stastna, bohata)
+wealthy_str = user_input('')
+happy = conditions(happy_str)
+wealthy = conditions(wealthy_str)
+advice(happy, wealthy)

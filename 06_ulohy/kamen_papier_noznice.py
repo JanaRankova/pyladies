@@ -1,56 +1,53 @@
 from random import randrange                  
+playerturn = ''
+compturn = ''
 
-pocet_kol = 0
-tahcloveka = ''
-tahpocitace = ''
-
-def tah_cloveka():
-    """zoberie tah od hraca"""
-    odpoved = input('Vyber si: kamen, papier alebo noznice?')
-    odpoved_cislo = int
-    if odpoved == 'kamen':
-        odpoved_cislo = 0
-        return odpoved_cislo
-    elif odpoved == 'noznice':
-        odpoved_cislo = 1
-        return odpoved_cislo
-    elif odpoved == 'papier':
-        odpoved_cislo = 2
-        return odpoved_cislo
+def player_turn():
+    """Ask player for a turn."""
+    response = input('Vyber si: kamen, papier alebo noznice?')
+    response_num = int
+    if response == 'kamen':
+        response_num = 0
+        return response_num
+    elif response == 'noznice':
+        response_num = 1
+        return response_num
+    elif response == 'papier':
+        response_num = 2
+        return response_num
     else:
         print('Nerozumiem!')
     
 
-def tah_pocitace():
-    """generuje nahodny tah PC"""
-    nahoda = randrange(3)
-    if nahoda == 0:                           
+def comp_turn():
+    """Generates random turn for a computer."""
+    throw = randrange(3)
+    if throw == 0:                           
         print('Pocitac si nahodne vybral kamen.')
-    elif nahoda == 1:
+    elif throw == 1:
         print('Pocitac si nahodne vybral noznice.')
-    elif nahoda == 2:
+    elif throw == 2:
         print('Pocitac si nahodne vybral papier.')
-    return nahoda
+    return throw
     
-def vysledky(tahcloveka, tahpocitace):
-    """vyhodnoti vysledky hry"""
-    if tahcloveka == tahpocitace:
+def results(playerturn, compturn):
+    """Evaluates turns and print results."""
+    if playerturn == compturn:
         print('Plichta.')
-    elif ((tahcloveka == 0 and tahpocitace == 1) or (tahcloveka == 1 and tahpocitace == 2) or (tahcloveka == 2 and tahpocitace == 0)):
+    elif ((playerturn == 0 and compturn == 1) or (playerturn == 1 and compturn == 2) or (playerturn == 2 and compturn == 0)):
         print('Vyhral(a) si!')
     else:
         print('Prehral(a) si!')
     return 
 
 while True:
-    pocet_kol += 1
-    tahcloveka = tah_cloveka()
-    if tahcloveka == None:
+    playerturn = player_turn()
+    if playerturn == None:
         break
 
-    tahpocitace = tah_pocitace()
-    vysledky(tahcloveka, tahpocitace)
+    compturn = comp_turn()
+    results(playerturn, compturn)
     print('Chces si zahrat este jedno kolo? (ak nie napis "koniec")')
-    este_jedno = input()
-    if este_jedno == 'koniec':
+    play_again = input()
+    if play_again == 'koniec':
         break

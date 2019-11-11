@@ -1,73 +1,71 @@
 from random import randrange
 
-def vyhodnot(hracie_pole):
-    """Vezme momentalny stav hracieho pola a podla podmienok vo funkcii, urci vyhercu."""
-    stav = ''
-    if 'xxx' in hracie_pole:
-        stav = 'x'
-    elif 'ooo' in hracie_pole:
-        stav = 'o'
-    elif '-' not in hracie_pole:
-        stav = '!'
+def evaluate(board):
+    """Evaluates curent state of the game and determines winner."""
+    state = ''
+    if 'xxx' in board:
+        state = 'x'
+    elif 'ooo' in board:
+        state = 'o'
+    elif '-' not in board:
+        state = '!'
     else:
-        stav = '-'
-    return stav
+        state = '-'
+    return state
 
-def tah_hraca(hracie_pole):
-    """Spyta sa hraca na poziciu, na ktoru chce  umiestnit symbol (hrac hra za 'x'). Zamietne nespravne zadane znaky.
-    Prepise hracie pole a vrati ho."""
-    cislo_policka = int(input('Zadajte poziciu, na ktoru chcete umiestnit symbol. Platne su cisla od 1-20. '))
-    cislo_policka -= 1 
-    if cislo_policka >= 0 and cislo_policka <= 19:
-        if hracie_pole[cislo_policka] == '-':
-            hracie_pole[cislo_policka] = 'x'
-            hracie_pole = ''.join(hracie_pole)
-            return hracie_pole
+def user_turn(board):
+    """Ask player for a position to place 'x' on. Denies wrong position and non integer input. Rewrites 
+    and returns board."""
+    position = int(input('Zadajte poziciu, na ktoru chcete umiestnit symbol. Platne su cisla od 1-20. '))
+    position -= 1 
+    if position >= 0 and position <= 19:
+        if board[position] == '-':
+            board[position] = 'x'
+            board = ''.join(board)
+            return board
         else:
             print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
-            tah_hraca(hracie_pole)
-            hracie_pole = ''.join(hracie_pole)
+            user_turn(board)
+            board = ''.join(board)
     else:
         print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
-        tah_hraca(hracie_pole)
-        hracie_pole = ''.join(hracie_pole)
-    return hracie_pole
+        user_turn(board)
+        board = ''.join(board)
+    return board
 
-def tah_pocitaca(hracie_pole):
-    """Generuje nahodne cislo a tah pocitaca na prazdne pole. Vracia hracie pole uz s tahom pc."""
-    cislo_policka = randrange(0, 20)
-    if hracie_pole[cislo_policka] == '-':
-            hracie_pole[cislo_policka] = 'o'          
-            hracie_pole = ''.join(hracie_pole)
+def comp_turn(board):
+    """Generates random turn for pc. Rewrites and returns board with changes."""
+    position = randrange(0, 20)
+    if board[position] == '-':
+            board[position] = 'o'          
+            board = ''.join(board)
     else:
-        tah_pocitaca(hracie_pole)
-        hracie_pole = ''.join(hracie_pole)
-    return hracie_pole
+        comp_turn(board)
+        board = ''.join(board)
+    return board
 
-def piskvorky_1D():
-    """Striedavo vola tah_hraca a tah_pocitaca a kontroluje vysledky az do momentu, kym jedna strana nevyhra.
-    Printuje medzistav po kazdom kole."""
-    pocet_kol = 0
-    hracie_pole = list('-' * 20)
+def tictactoe_1D():
+    """Alternately calls for user_turn and comp_turn up the winning turn of either.
+    Prints board state after each turn."""
+    round_count = 0
+    board = list('-' * 20)
     while True:
-        hracie_pole = list(hracie_pole)
-        hracie_pole = tah_hraca(hracie_pole)
-        vyhodnot(hracie_pole)
-        pocet_kol += 1
-        print('{}. kolo: {}'.format(pocet_kol, hracie_pole))
-        hracie_pole = list(hracie_pole)
-        hracie_pole = tah_pocitaca(hracie_pole)
-        vyhodnot(hracie_pole)
-        pocet_kol += 1
-        print('{}. kolo: {}'.format(pocet_kol, hracie_pole))
-        if vyhodnot(hracie_pole) != '-':
+        board = list(board)
+        board = user_turn(board)
+        evaluate(board)
+        round_count += 1
+        print('{}. kolo: {}'.format(round_count, board))
+        board = list(board)
+        board = comp_turn(board)
+        evaluate(board)
+        print('{}. kolo: {}'.format(round_count, board))
+        if evaluate(board) != '-':
             break
-    if vyhodnot(hracie_pole) == 'x':
-        vyherca = 'x'
-    elif vyhodnot(hracie_pole) == 'o':
-        vyherca = 'o'
+    if evaluate(board) == 'x':
+        print('Hru vyhral hrac hrajuci za "x" symbol.')
+    elif evaluate(board) == 'o':
+        print('Hru vyhral hrac hrajuci za "o" symbol.')
     else:
-        vyherca = 'none'
-    return vyherca
+        print('Hra skoncila remizou hraca a pocitaca.')
 
-print('Hru vyhral hrac hrajuci za "{}" symbol.'.format(piskvorky_1D()))
+tictactoe_1D()
