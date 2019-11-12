@@ -38,7 +38,7 @@ def datum(rodne_cislo):
         mesiac = mesiac - 50           
     else:
         return False
-    return den, mesiac, tisicrocie
+    return ('{}. {}. {}'.format(den, mesiac, tisicrocie))
 
 def pohlavie(cislo_list):  
     if cislo_list[2] == '0' or cislo_list[2] == '1':               
