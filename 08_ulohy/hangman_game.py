@@ -10,11 +10,11 @@ wrong_char = ''
 def evaluate():
     """Shows when player wins + number of guesses."""
     if len(wrong_char) > 4:
-        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravnych pokusov.'.format(hidden_word, len(wrong_char)))
+        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravnych pokusov.'.format(hidden_word.upper(), len(wrong_char)))
     elif len(wrong_char) >1:
-        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravne pokusy.'.format(hidden_word, len(wrong_char)))
+        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravne pokusy.'.format(hidden_word.upper(), len(wrong_char)))
     else:
-        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravny pokus.'.format(hidden_word, len(wrong_char)))
+        print('Gratulujem, vyhrala si hru so slovom {}. Spravila si {}. nespravny pokus.'.format(hidden_word.upper(), len(wrong_char)))
 
 while True:
     hm_functions.show_step(hangman, hidden_word, wrong_char, right_char)
@@ -31,6 +31,6 @@ while True:
     else:
         wrong_char = wrong_char + guess
         if len(wrong_char) == 9:
-            print(hangman[9])
-            print('Prehral si po', len(right_char) + len(wrong_char), 'kolach!')
+            print(hangman[10])
+            print('Prehral si po', len(right_char) + len(wrong_char), 'kolach! Hadane slovo bolo {}.'.format(hidden_word.upper()))
             break
