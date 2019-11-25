@@ -1,11 +1,14 @@
+import turn_piskvorky
+
 def comp_turn(board):
     """Generates random turn for pc. Rewrites and returns board with changes."""
     import random
-    position = random.randrange(0, 20)
-    if board[position] == '-':
-            board[position] = 'o'          
-            board = ''.join(board)
+    if 'x' in board:
+        symbol = 'o'
     else:
-        comp_turn(board)
-        board = ''.join(board)
-    return board
+        symbol = 'x'
+    while True:
+        position = random.randrange(0, 20)
+        if board[position] == '-':
+            return turn_piskvorky.turn(board, position, symbol)
+    

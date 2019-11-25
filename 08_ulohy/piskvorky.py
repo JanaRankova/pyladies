@@ -1,4 +1,5 @@
 import ai
+import turn_piskvorky
 
 def evaluate(board):
     """Evaluates curent state of the game and determines winner."""
@@ -16,36 +17,33 @@ def evaluate(board):
 def user_turn(board):
     """Ask player for a position to place 'x' on. Denies wrong position and non integer input. Rewrites 
     and returns board."""
-    position = int(input('Zadajte poziciu, na ktoru chcete umiestnit symbol. Platne su cisla od 1-20. '))
-    position -= 1 
-    if position >= 0 and position <= 19:
-        if board[position] == '-':
-            board[position] = 'x'
-            board = ''.join(board)
-            return board
+    symbol = turn_piskvorky.what_symbol()
+    while True:
+        position = int(input('Zadajte poziciu, na ktoru chcete umiestnit symbol. Platne su cisla od 1-20. '))
+        position -= 1 
+        if position not in range(0, 20):
+           print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
+        elif board[position] != '-':
+           print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
         else:
-            print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
-            user_turn(board)
-            board = ''.join(board)
-    else:
-        print('Vami zadana pozicia je obsadena alebo neexistuje. Skuste vybrat inu poziciu.')
-        user_turn(board)
-        board = ''.join(board)
-    return board
+            break
+    return turn_piskvorky.turn(board, position, symbol)
 
 def tictactoe_1D():
     """Alternately calls for user_turn and comp_turn up the winning turn of either.
     Prints board state after each turn."""
     round_count = 0
-    board = list('-' * 20)
+    board = '-' * 20
     while True:
         board = list(board)
         board = user_turn(board)
+        board = ''.join(board)
         evaluate(board)
         round_count += 1
         print('{}. kolo: {}'.format(round_count, board))
         board = list(board)
         board = ai.comp_turn(board)
+        board = ''.join(board)
         evaluate(board)
         print('{}. kolo: {}'.format(round_count, board))
         if evaluate(board) != '-':
