@@ -2,7 +2,6 @@ from flask import Flask, url_for, render_template, abort
 import json
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 
 @app.route('/')
 def index():
