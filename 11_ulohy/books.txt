@@ -1,0 +1,7 @@
+{
+    "JORDAN": "Wheel of Time 2 - The Great Hunt", 
+    "DOUGHTY": "Smoke Gets in Your Eyes: And Other Lessons from the Crematory", 
+    "GALBRAITH": "The Cuckoos Calling", 
+    "RIDLEY": "The Red Queen: Sex and the Evolution of Human Nature", 
+    "LARSSON": "The Girl with the Dragon Tattoo"
+}
